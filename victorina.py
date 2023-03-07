@@ -1,8 +1,8 @@
 import json
 import random
 
-ball_1 = 0
-ball_2 = 0
+points_1 = 0
+points_2 = 0
 lifes = 0
 lifes_1 = 1
 lifes_2 = 1
@@ -39,8 +39,8 @@ def choose_random_question():
     global lifes
     global lifes_1
     global lifes_2
-    global ball_1
-    global ball_2
+    global points_1
+    global points_2
     question = random.choice(questions_base)
     questions_base.remove(question)
     for key in question.keys():
@@ -48,22 +48,26 @@ def choose_random_question():
         break
     print(f'Ходит {player_1.title()}')
     if input('\t').lower() == question[key]:
-        ball_1 += 1
-        print(f'ты угадал. У тебя {ball_1} баллов')
+        points_1 += 1
+        print(f'ты угадал. У тебя {points_1} баллов')
     else:
         lifes_1 -= 1
-        print(f'Ты не угадал. Теряешь жизнь! Теперь у тебя {lifes_1} жизней. У тебя {ball_1} баллов\n')
+        print(f'Ты не угадал. Теряешь жизнь! Теперь у тебя {lifes_1} жизней. У тебя {points_1} баллов\n')
     print(f'Ходит {player_2.title()}')
     if input('\t').lower() == question[key]:
-        ball_2 += 1
-        print(f'ты угадал. У тебя {ball_2} баллов')
+        points_2 += 1
+        print(f'ты угадал. У тебя {points_2} баллов')
     else:
         lifes_2 -= 1
-        print(f'Ты не угадал. Теряешь жизнь! Теперь у тебя {lifes_2} жизней. У тебя {ball_2} баллов\n')
+        print(f'Ты не угадал. Теряешь жизнь! Теперь у тебя {lifes_2} жизней. У тебя {points_2} баллов\n')
 
 set_lifes()
 add_players()
 while lifes_1 > 0 or lifes_2 > 0: 
     import_questions_base()
     choose_random_question()
+print(f'Игра окончена. У {player_1} {points_1} баллов, {player_2} {points_2} баллов')
+
+# FIXME не кончается игра если у игрока кончились жизни
+
 
